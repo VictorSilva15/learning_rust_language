@@ -1,0 +1,5 @@
+Learn Rust Language	true
+learn english	true
+learn violin	false
+Create Yuri's music	true
+Do all lesson	false

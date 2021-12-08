@@ -48,14 +48,19 @@ fn main() {
     //println!("User1 Email: {}", user1.email); <- This will throw a compiler error!
 
     
-
-
     //Calling Tuple Structs:
     
     let black = Color(0,0,0);
     let origin = Point(0,0,0);
 
     println!("Black: {} {} {}", black.0, black.1, black.2);
+
+
+    
+
+
+
+
 
 }
 

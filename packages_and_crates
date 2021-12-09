@@ -1,0 +1,86 @@
+WHAT'S A PACKAGE?
+
+Package is one or more crates that provides a set of functionality.
+the project that we build with the syntax:
+`cargo new my-project`
+
+In this case my-project is the package. A package contains a Cargo.toml
+file that describes how to build those crates.
+
+WHAT'S A CRATE?
+
+Crate is a binary or library. The crate root is a source file
+that thre Rust compiler starts from and makes up the root module 
+of your crate. Basically, when the compiler runs, it gets the
+src/main.rs (binary) or src/lib.rs (library) and create a binary
+crate with de same name as the package in target/debug. Cargo passes
+the crate root files to rustc to build the library or binary
+
+
+If we run `cargo new my-project` we'll have a package that only
+contains src/main.rs, meaning it only contains a binary crate named
+my-project. if a package contains src/main.rs and src/lib.rs, it has two
+crates: a library and a binary, both with the same name as the package. A
+package can have multiple binary crates by placing files in the src/bin 
+directory: each file will be a separate binary crate
+
+A crate will group related funcionality together in a scope so the
+funcionality is easy to share between multiple projects. For example, 
+the rand crate provides functionality that generates rando numbers. We can
+use that functionality in our own projects by bringing the rand crate into our
+project's scope. All the functionality provided by the rand crate is accessible
+through the crate's name, rand.
+
+Keeping a crate’s functionality in its own scope clarifies whether particular functionality is defined in our crate or the rand crate and prevents potential conflicts. For example, the rand crate provides a trait named Rng. We can also define a struct named Rng in our own crate. Because a crate’s functionality is namespaced in its own scope, when we add rand as a dependency, the compiler isn’t confused about what the name Rng refers to. In our crate, it refers to the struct Rng that we defined. We would access the Rng trait from the rand crate as rand::Rng. 😀️
+
+-> To create a binary run: cargo new my-project
+-> To create a library run: cargo new --lib my-library
+
+
+Earlier, we mentioned that src/main.rs and src/lib.rs are called crate roots. The reason for their name is that the contents of either of these two files form a module named crate at the root of the crate’s module structure, known as the module tree.
+
+crate
+ └── front_of_house
+     ├── hosting
+     │   ├── add_to_waitlist
+     │   └── seat_at_table
+     └── serving
+         ├── take_order
+         ├── serve_order
+         └── take_payment
+
+
+This tree shows how some of the modules nest inside one another (for example, hosting nests inside front_of_house). The tree also shows that some modules are siblings to each other, meaning they’re defined in the same module (hosting and serving are defined within front_of_house). To continue the family metaphor, if module A is contained inside module B, we say that module A is the child of module B and that module B is the parent of module A. Notice that the entire module tree is rooted under the implicit module named crate.
+
+The module tree might remind you of the filesystem’s directory tree on your computer; this is a very apt comparison! Just like directories in a filesystem, you use modules to organize your code. And just like files in a directory, we need a way to find our modules.
+
+
+Modules aren’t useful only for organizing your code. They also define Rust’s privacy boundary: the line that encapsulates the implementation details external code isn’t allowed to know about, call, or rely on. So, if you want to make an item like a function or struct private, you put it in a module.
+
+The way privacy works in Rust is that all items (functions, methods, structs, enums, modules, and constants) are private by default. Items in a parent module can’t use the private items inside child modules, but items in child modules can use the items in their ancestor modules. The reason is that child modules wrap and hide their implementation details, but the child modules can see the context in which they’re defined. To continue with the restaurant metaphor, think of the privacy rules as being like the back office of a restaurant: what goes on in there is private to restaurant customers, but office managers can see and do everything in the restaurant in which they operate.
+
+Rust chose to have the module system function this way so that hiding inner implementation details is the default. That way, you know which parts of the inner code you can change without breaking outer code. But you can expose inner parts of child modules' code to outer ancestor modules by using the pub keyword to make an item public.
+
+To run a library crate we use `cargo build` instead of `cargo run`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

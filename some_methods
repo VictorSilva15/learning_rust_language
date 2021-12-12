@@ -1,0 +1,30 @@
+some properties and methods:
+
+-> .collect() can take anything iterable, and turn it into a relevant 
+collection. This is one of the more powerful methods in the standard library, 
+used in a variety of contexts.
+
+The most basic pattern in which collect() is used is to turn one collection 
+into another. You take a collection, call iter on it, do a bunch of 
+transformations, and then collect() at the end.
+
+-> .filter() Creates an iterator which uses a closure to determine if an 
+element should be yielded.
+
+Given an element the closure must return true or false. The returned iterator
+will yield only the elements for which the closure returns true.
+
+STRINGS:
+
+-> .to_owned Creates owned data from borrowed data, usually by cloning.
+and returns a String
+
+
+type arch:
+
+32bit x86 -> u32
+
+64bit -> u64
+
+
+

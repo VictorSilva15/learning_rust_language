@@ -257,6 +257,18 @@ fn main() {
 
     println!("{}",another_array[2]);
 
+    //Bitwise Operators = 
+    
+    let bw1 = 1;
+    let bw2 = 2;
 
-
+    let bwres1 = bw1 & bw2; // 0 (01 && 10 -> 00)
+    let bwres2 = bw1 | bw2; // 3 (01 || 10 -> 11)
+    let bwres3 = bw1 ^ bw2; // 3 (01 != 10 -> 11)
+    let bwres4 = bw1 << bw2; // 4 (add b number of 0s to the end of a ->
+    //'01' + '00' -> '100')
+    let bwres5 = bw1 >> bw2; // 0 (Remove b number of bits from the end of a -> 0-1- -> 0)
+    
+    println!("\n\n --- Using Bitwise --- \n\n{}\n{}\n{}\n{}\n{}",
+        bwres1,bwres2,bwres3,bwres4,bwres5);
 }

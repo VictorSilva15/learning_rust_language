@@ -21,6 +21,8 @@ fn main() {
     let module_of_17 = module(17);
 
     println!("The module of 17 is: {}", module_of_17);
+
+    catching_a_function();
 }
 
 //Creating a new function
@@ -49,5 +51,12 @@ fn module(mut n1: i32) -> i32 {
     // or it could be: return n1, both the way works
 } 
 
-
+// Variables can hold functions:
+fn catching_a_function(){
+    let p = five;
+    println!("p is the function five() now: {}", p());
+    //It'll return 5;
+    println!("{}", five());
+    //We can still use the five() function!
+}
 

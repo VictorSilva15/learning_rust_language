@@ -121,6 +121,38 @@ fn main() {
     //If we don't use the function rev(), it's not necessary use parentheses in the range 1..4;
     // rev() will reverse the sequence of the range (1..4 becomes 4..1)
 
+
+
+    //MATCH 
+    
+
+    let tshirt_width = 20;
+
+    let tshirt_size = match tshirt_width {
+        16 => "S", //check 16
+        17 | 18 =>  "M", // check 17 and 18
+        19..=21 => "L", // check from 19 to 21 (19,20,21)
+        22 => "XL", // check 22
+        _ => "Not Available" // check anything else
+    };
+
+    println!("\n--- MATCH ---\n");
+    println!("tshirt_size: {}", tshirt_size);
+    
+
+    let marks_paper_a: u8 = 45;
+    let marks_paper_b: u8 = 50;
+    
+    let output = match (marks_paper_a, marks_paper_b) {
+        (50, 50) => "Full marks for both papers",
+        (50, _) => "Full marks for paper A",
+        (_, 50) => "Full marks for paper B",
+        (x,y) if x > 25 && y > 25 => "good",
+        (_,_) => "work hard"
+    };
+
+    println!("\n{}\n", output);
+
 }
 
 fn valid(age:u8) -> bool{

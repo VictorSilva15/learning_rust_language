@@ -1,3 +1,6 @@
+mod handle_erros;
+use handle_erros::recoverable;
+
 //ERROR HANDLING 
 //
 //errors can be two types, recoverable and unrecoverable erros.
@@ -29,4 +32,9 @@ fn main() {
     //To handle the error and get more details of what are happens, you can use:
     //`RUST_BACKTRACE=1` before the `cargo run` syntax to get a list of all the functions
     //called to program runs
+
+    //RECOVERABLE ERROS:
+
+    recoverable::recoverable_erros_with_result();
+    recoverable::propagating_error();
 }

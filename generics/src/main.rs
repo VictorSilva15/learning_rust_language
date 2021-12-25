@@ -1,3 +1,6 @@
+mod generics2;
+
+
 fn main() {
   //GENERICS
   //
@@ -63,7 +66,8 @@ fn main() {
         Some(words) => println!("Number of words: {}", words),
         None => println!("There're no words"),
     }
-
+    
+    generics2::generics2();
 }
 
 #[derive(Debug)]

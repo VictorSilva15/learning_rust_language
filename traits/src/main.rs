@@ -1,4 +1,4 @@
-#![allow(dead_code)]
+#![allow(dead_code, unused)]
 //TRAITS
 //
 //Traits are kind of similar to interfaces in OOP languages.
@@ -9,6 +9,8 @@
 //Default methods can be overridden when implementing types
 
 //Impls without traits
+
+mod traits;
 
 struct Player {
     first_name: String,
@@ -51,6 +53,13 @@ fn main() {
 
     make_sound(&kitty);
     make_sound(&the_bell);
+
+
+    traits::traits1::traits();
+    traits::traits2::traits2();
+
+
+
 }
 
 //Impls & Traits without default methods

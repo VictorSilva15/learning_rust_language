@@ -161,3 +161,145 @@ pub mod traits2 {
     }
 
 }
+
+
+pub mod traits3 {
+    //TRAITS AS PARAMETERS
+
+    //Now that you know how to define and implement traits, we can explore how to use traits 
+    //to define functions that accept many different types.
+
+    //For example, in Listing 10-13, we implemented the Summary trait on the NewsArticle and 
+    //Tweet types. We can define a notify function that calls the summarize method on its item 
+    //parameter, which is of some type that implements the Summary trait. To do this, we can use 
+    //the impl Trait syntax, like this: 
+    
+    //Instead of a concrete type for the item parameter, we specify the impl keyword and the 
+    //trait name. This parameter accepts any type that implements the specified trait. In the 
+    //body of notify, we can call any methods on item that come from the Summary trait, such as 
+    //summarize. We can call notify and pass in any instance of NewsArticle or Tweet. Code that 
+    //calls the function with any other type, such as a String or an i32, won’t compile because 
+    //those types don’t implement Summary.
+
+    pub trait Summary {
+        fn summarize(&self) -> String;
+    }
+
+    pub struct NewsArticle {
+        pub headline: String,
+        pub location: String,
+        pub author: String,
+        pub content: String,
+    }
+
+
+    impl Summary for NewsArticle {
+        fn summarize(&self) -> String {
+            format!("{}, by {} ({})", self.headline, self.author, self.location)
+        }
+    }
+
+    pub struct Tweet {
+        username: String,
+        content: String,
+        reply: bool,
+        retweet: bool,
+    }
+
+    impl Summary for Tweet {
+        fn summarize(&self) -> String {
+            format!("@{}", self.username)
+        }
+    }
+
+    pub fn notify(item: &impl Summary) {
+        println!("Breaking news! {}", item.summarize());
+    }
+
+    //The same can be done as follows:
+
+    pub fn notify2<T: Summary>(item: &T) {
+        println!("notify2 - Breaking news! {}", item.summarize())
+    }   
+
+    //This longer form is equivalent to the example in the previous section but is more verbose. 
+    //We place trait bounds with the declaration of the generic type parameter after a colon and 
+    //inside angle brackets.
+    
+    //The impl Trait syntax is convenient and makes for more concise code in simple cases. 
+    //The trait bound syntax can express more complexity in other cases. For example, we can have 
+    //two parameters that implement Summary. Using the impl Trait syntax looks like this:
+
+    /*
+        pub fn notify(item1: &impl Summary, item2: &impl Summary) {}
+    */
+
+    //If we wanted this function to allow item1 and item2 to have different types, using impl 
+    //Trait would be appropriate (as long as both types implement Summary). If we wanted to force 
+    //both parameters to have the same type, that’s only possible to express using a trait bound, 
+    //like this:
+
+    /*
+        pub fn notify<T: Summary>(item1: &T, item2: &T) {}
+    */
+
+
+    //Specifying Multiple Trait Bounds with the + Syntax
+
+    //We can also specify more than one trait bound. Say we wanted notify to use display 
+    //formatting on item as well as the summarize method: we specify in the notify definition 
+    //that item must implement both Display and Summary. We can do so using the + syntax:
+
+    /*
+        pub fn notify(item: &(impl Summary + Display)) {}
+
+        or
+
+        pub fn notify<T: Summary + Display>(item: &T) {}
+    */
+
+    //We can also use the `where` syntax to define which type and generics will be a specific
+    //type. Instead of use declare this way:
+
+    use std::fmt::{Display, Debug};
+
+    pub fn some_function<T: Display + Summary ,U: Summary + Debug>(item1: &T, item2: &U) -> i32 {
+        //It's just an example, so will not write no code here, only return a number
+        10
+    }
+
+    //We can write the same thing above in a concise form, being better to read:
+
+    pub fn some_function2<T, U>(item1: &T, item2: &U) -> i32
+        where T: Display + Summary,
+              U: Summary + Debug
+    {
+        10
+    }
+
+    //This function’s signature is less cluttered: the function name, parameter list, and return 
+    //type are close together, similar to a function without lots of trait bounds.
+
+    pub fn traits3() {
+
+        let article = NewsArticle {
+            headline: "New programming languages ​​will be used in the not-too-distant future".into(),
+            location: "São Paulo - Brazil".to_owned(),
+            author: "Victor Silva".into(),
+            content: "lalalal......".to_string()
+        };
+
+        let tweet = Tweet {
+            username: String::from("horse_ebooks"),
+            content: String::from(
+                "of course, as you probably already know, people",
+            ),
+            reply: false,
+            retweet: false
+        };  
+
+        notify(&article);
+        notify2(&tweet);
+
+    }
+}

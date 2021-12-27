@@ -11,6 +11,7 @@
 //Impls without traits
 
 mod traits;
+mod traits2;
 
 struct Player {
     first_name: String,
@@ -31,6 +32,45 @@ impl Player {
 // But we can not implement existing traits into existing types.
 
 fn main() {
+
+
+    //LARGEST NUMBER
+
+    fn largest<T: PartialOrd>(list: &[T]) -> &T {
+        let mut largest = &list[0];
+    
+        for item in list {
+            if item > largest {
+                largest = item;
+            }
+        }
+    
+        &largest
+    }
+    
+    //We can also write the code above this way:
+    
+    fn largest2<T: PartialOrd + Copy>(list: &[T]) -> T {
+        let mut largest = list[0];
+        
+        for &item in list {
+            if item > largest {
+                largest = item;
+            }
+        }
+    
+        largest
+    }
+
+    let greater_number: Vec<u64> = vec![682,1239, 12939212039182983, 19, 3910, 1129810238810123819];
+    println!("{}", largest(&greater_number));
+        
+    
+    let grater_number_2: Vec<u64> = vec![1821391, 1290839123, 9189754935, 57039273];
+    println!("{}", largest2(&grater_number_2));
+    
+
+
     let player_1 = Player {
         first_name: "Victor".to_string(),
         last_name: "Silva".to_string(),
@@ -57,8 +97,10 @@ fn main() {
 
     traits::traits1::traits();
     traits::traits2::traits2();
+    traits::traits3::traits3();
 
 
+    traits2::traits2::traits1();
 
 }
 

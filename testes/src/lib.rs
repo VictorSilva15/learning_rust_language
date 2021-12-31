@@ -21,7 +21,9 @@ impl Rectangle {
     }
 }
 
-
+pub fn add_two(a: i32) -> i32 {
+    a + 2
+}
 
 #[cfg(test)]
 mod tests {
@@ -89,7 +91,24 @@ mod tests {
     //whether the arguments passed into it are equal. If the
     //arguments are equal, it does nothing, else it calls panic
     //macro. The same happens with assert_ne!(), however, assert_ne!()
-    //will checks ....
+    //will checks if the arguments are differents
+
+    #[test]
+    fn it_adds_two() {
+        assert_eq!(4, add_two(2));
+    }
+
+    #[test]
+    fn it_add_two_but_its_different(){
+        assert_ne!(5, add_two(2));
+    }
+
+    //In some languages and test frameworks, the parameters to the functions
+    //that assert two values are equal are called expected and actual,
+    //and the other in which we specify the matters. However, in Rust, they're
+    //called left and right, and the order in wich we specify the value,
+    //we  expect and the value that the code under test produces does'nt matter.
+
 }
 
 

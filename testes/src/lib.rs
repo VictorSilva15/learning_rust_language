@@ -25,6 +25,16 @@ pub fn add_two(a: i32) -> i32 {
     a + 2
 }
 
+//All primitive types and most of the standard library types
+//implement the PartialEq and Debug traits. To Structs and Enums
+//that we create, we need implement, using: `#[derive(Debug)]`
+//and #[derive(PartialEq)] or these traits together as show bellow:
+
+#[derive(Debug, PartialEq)]
+pub struct Square {
+    size: u32
+}
+
 #[cfg(test)]
 mod tests {
 
@@ -91,7 +101,10 @@ mod tests {
     //whether the arguments passed into it are equal. If the
     //arguments are equal, it does nothing, else it calls panic
     //macro. The same happens with assert_ne!(), however, assert_ne!()
-    //will checks if the arguments are differents
+    //will checks if the arguments are differents.
+    //The assert_ne!() macro is useful for cases when we're not sure what
+    //a value will be, but we know what the value definitely won't be if our
+    //code is functioning as we intend.
 
     #[test]
     fn it_adds_two() {
@@ -109,6 +122,28 @@ mod tests {
     //called left and right, and the order in wich we specify the value,
     //we  expect and the value that the code under test produces does'nt matter.
 
+    //When the assertions fail, these macros print their arguments using debug
+    //formatting, which means the values being compared must implement the
+    //PartialEq and Debug traits.
+
+    //NOTE: All the primitive types and most of the standard library types
+    //implement these traits. For Structs and Enums that you define, you'll
+    //need to implement PartialEq to assert that the values of those types are 
+    //Equal. You'll need to implement Debug to print the values when the assertion
+    //fails.
+
+    #[test]
+    fn verify_structs_partialeq() {
+        let square1 = Square {
+            size: 12,
+        };
+
+        let square2 = Square {
+            size: 12,
+        };
+
+        assert_eq!(square1, square2);
+    }
 }
 
 

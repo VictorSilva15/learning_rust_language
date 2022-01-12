@@ -20,7 +20,7 @@ fn main() {
 
     println!("\nSearching for {}", config.query);
     println!("In file {}", config.filename);
-
+    
     // run(config).unwrap_or_else(|error| {
     //     println!("\nApplication error: {}\n", error);
     //     process::exit(1)

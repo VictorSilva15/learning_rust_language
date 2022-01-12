@@ -1,5 +1,6 @@
-Learn Rust Language	true
+Learning NodeJS	true
 learn english	true
-learn violin	false
-Create Yuri's music	true
 Do all lesson	false
+Learn Rust Language	true
+Create Yuri's music	true
+learn violin	false

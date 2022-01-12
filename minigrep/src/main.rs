@@ -1,6 +1,5 @@
 //Importing standard libraries
 use std::{env, process};
-
 use minigrep::Config;
 
 

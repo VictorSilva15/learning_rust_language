@@ -13,7 +13,7 @@ fn main() {
     // process by calling process::exit(1). The '1' means that the code end with 
     // some error 
     let config = Config::new(&args).unwrap_or_else(|err| {
-        println!("\nProblem parsing arguments: {}\n", err);
+        eprintln!("\nProblem parsing arguments: {}\n", err);
         process::exit(1)
     });
 
@@ -36,7 +36,7 @@ fn main() {
     // or 
 
     if let Err(e) = minigrep::run(config) {
-        println!("\nApplication error: {}\n", e);
+        eprintln!("\nApplication error: {}\n", e);
         process::exit(1);
     }
 
